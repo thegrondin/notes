@@ -12,7 +12,7 @@ const format = (text) => {
     for (const line of lines) {
 
         const element = mapping.filter(m => line.includes(m.key))[0];
-        console.log(element);
+
 
         if (!element) {
             html.push(`<p>${line}</p>`);
