@@ -43,4 +43,5 @@ const on = (name, element, callback) => {
     }
 }
 
-export default { on }
+
+export default { on  }
