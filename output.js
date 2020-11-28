@@ -7,14 +7,10 @@ const write = (outputElement, lines) => {
 
         const line = lines[i];
 
-        if (buf[i] !== line) {
-            buf[i] = line;
-        }
-
+        if (buf[i] !== line) buf[i] = line;
     }
 
     outputElement.innerHTML = buf.join('');
-
 }
 
 export default {
