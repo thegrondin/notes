@@ -8,14 +8,22 @@ const fs = require('fs');
 // load -n fichier.note -p ~/Document/Cours
 //
 
+let activeProperties = {} 
+
 const commands = {
     "save" : (args, input, output) => {
 
-        const file = args.filter(a => a.arg === '-n')[0].value;
-        const path = args.filter(a => a.arg === '-p')[0].value;
+        const pathArg = args.filter(a => a.arg === '-p');
+
+        let path = pathArg.length !== 0 ? pathArg[0].value : null;
+
+        if (!path) {
+            path = activeProperties.currentPath;
+        }
 
         try {
-            fs.writeFileSync(path + file, input.value, 'utf-8')
+            fs.writeFileSync(path, input.value, 'utf-8')
+            activeProperties.currentPath = path;
         }
         catch(e) {
             console.log(e);
@@ -25,8 +33,17 @@ const commands = {
     "export" : () => {
 
     },
-    "load" : () => {
+    "load" : (args, input, output) => {
+        const path = args.filter(a => a.arg === '-p')[0].value;
 
+        try {
+            const result = fs.readFileSync(path, 'utf-8');
+            input.value = result;
+            activeProperties.currentPath = path;
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 }
 

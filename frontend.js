@@ -18,3 +18,4 @@ Commands.on('entered', commandElement, (command) => {
 })
 
 //save -n fichier.note -p C:\Users\tomto\Documents\notes\
+//save -n fichier2.notes -p /home/thomas/Documents/
